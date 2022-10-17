@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class BookController
 {
     @Autowired
@@ -21,13 +22,13 @@ public class BookController
         this.bookService = bookService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/books/all")
     public List<Book> list()
     {
         return bookService.listAll();
     }
 
-    @DeleteMapping("/book/{bookid}")
+    @DeleteMapping("/book")
     private void deleteBook(@PathVariable("bookid") int bookid)
     {
         bookService.delete(bookid);
