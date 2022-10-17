@@ -11,13 +11,11 @@ import java.util.List;
 
 @Service
 @Transactional
-public class BookService
-{
+public class BookService {
     @Autowired
     private BookRepository repo;
 
-    public List<Book> listAll()
-    {
+    public List<Book> listAll() {
         return this.repo.findAll();
     }
 
@@ -33,19 +31,17 @@ public class BookService
         repo.deleteById(id);
     }
 
-    public void saveOrUpdate(Book books)
-    {
+    public void saveOrUpdate(Book books) {
         repo.save(books);
     }
 
-    public List<Book> getByName(String name)
-    {
-        return repo.findByNameContaining(name);
+    public List<Book> getByName(String name) {
+        return this.repo.findByNameContaining(name);
     }
 
-    public List<Book> getByEditorialId(Integer ediId)
-    {
-        return repo.findByEditorialId(ediId);
+    public List<Book> getByEditorialId(Integer id) {
+        return repo.findByEditorialId(id);
     }
+
 }
 

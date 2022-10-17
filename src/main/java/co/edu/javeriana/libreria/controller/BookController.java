@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 public class BookController
 {
     @Autowired
@@ -23,6 +22,7 @@ public class BookController
     }
 
     @GetMapping("/books/all")
+    @CrossOrigin
     public List<Book> list()
     {
         return bookService.listAll();
@@ -50,8 +50,9 @@ public class BookController
     }
 
     // buscar por nombre
-    @GetMapping("/nombre/{bookName}")
-    public List<Book> findByName(@PathVariable("bookName")String name)
+    @GetMapping("/books/nam")
+    @CrossOrigin
+    public List<Book> findByName(@RequestParam("name") String name)
     {
         return bookService.getByName(name);
     }
@@ -64,10 +65,10 @@ public class BookController
     }
 
     // buscar por id editorial
-    @GetMapping("/idEdi/{editorialId}")
-    public List<Book> findByEditorial(@PathVariable("editorialId")Integer ediId)
+    @GetMapping("/books/editorial")
+    public List<Book> findByEditorial(@RequestParam("editorialId")Integer id)
     {
-        return bookService.getByEditorialId(ediId);
+        return bookService.getByEditorialId(id);
     }
 
 }

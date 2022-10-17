@@ -9,5 +9,5 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book, Integer>
 {
     List<Book> findByNameContaining(String name);
-    List<Book> findByEditorialId(Integer ediId);
+    List<Book> findByEditorialId(Integer id);
 }
