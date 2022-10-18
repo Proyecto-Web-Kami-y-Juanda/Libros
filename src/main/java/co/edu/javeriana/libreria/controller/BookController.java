@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class BookController
 {
     @Autowired
@@ -22,7 +23,6 @@ public class BookController
     }
 
     @GetMapping("/books/all")
-    @CrossOrigin
     public List<Book> list()
     {
         return bookService.listAll();
@@ -51,7 +51,6 @@ public class BookController
 
     // buscar por nombre
     @GetMapping("/books/nam")
-    @CrossOrigin
     public List<Book> findByName(@RequestParam("name") String name)
     {
         return bookService.getByName(name);
