@@ -57,8 +57,8 @@ public class BookController
     }
 
     // buscar por id
-    @GetMapping("/id/{bookId}")
-    public Book findById(@PathVariable("bookId")Integer id)
+    @GetMapping("/id")
+    public Book findById(@RequestParam("id")Integer id)
     {
         return bookService.get(id);
     }

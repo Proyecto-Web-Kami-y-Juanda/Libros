@@ -30,6 +30,7 @@ public class LibreriaApplication
 					.antMatchers(HttpMethod.GET, "/books/all").permitAll()
 					.antMatchers(HttpMethod.GET, "/books/nam").permitAll()
 					.antMatchers(HttpMethod.GET, "/books/editorial").permitAll()
+					.antMatchers(HttpMethod.GET, "/id").permitAll()
 					.anyRequest().authenticated();
 		}
 	}
