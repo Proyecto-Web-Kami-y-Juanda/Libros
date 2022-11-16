@@ -28,7 +28,7 @@ public class BookController
         return bookService.listAll();
     }
 
-    @DeleteMapping("/book")
+    @DeleteMapping("/book/{bookid}")
     private void deleteBook(@PathVariable("bookid") int bookid)
     {
         bookService.delete(bookid);
@@ -57,9 +57,10 @@ public class BookController
     }
 
     // buscar por id
-    @GetMapping("/id")
-    public Book findById(@RequestParam("id")Integer id)
+    @GetMapping("/find/{id}")
+    public Book findById(@PathVariable("bookid") Integer id)
     {
+        System.out.println("PASA POR ACAAAAAA");
         return bookService.get(id);
     }
 
