@@ -1,6 +1,11 @@
 package co.edu.javeriana.libreria.controller;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import co.edu.javeriana.libreria.entity.Book;
@@ -12,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200/")
 public class BookController
 {
     @Autowired
@@ -26,6 +31,21 @@ public class BookController
     public List<Book> list()
     {
         return bookService.listAll();
+    }
+
+    //Paginacion
+    @GetMapping("/libros")
+    public ResponseEntity<Page<Book>> paginas(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String order,
+            @RequestParam(defaultValue = "true") boolean asc){
+
+        Page<Book> books = bookService.paginas(PageRequest.of(page, size, Sort.by(order)));
+        if (!asc){
+            books = bookService.paginas(PageRequest.of(page, size, Sort.by(order).descending()));
+        }
+        return new ResponseEntity<Page<Book>>(books, HttpStatus.OK);
     }
 
     @DeleteMapping("/book/{bookid}")
@@ -58,9 +78,8 @@ public class BookController
 
     // buscar por id
     @GetMapping("/find/{id}")
-    public Book findById(@PathVariable("bookid") Integer id)
+    public Book findById(@PathVariable("id") int id)
     {
-        System.out.println("PASA POR ACAAAAAA");
         return bookService.get(id);
     }
 
